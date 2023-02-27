@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name = "viewport" charset="utf-8" content="width=device-width, initial-scale=1">
+    <title>Jack Au's Personal Page</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        /*Fonts*/
+        @font-face {
+            font-family: JackAu_Icon;
+            src: url(MajorMonoDisplay-Regular.ttf);
+        }
+
+        @font-face {
+            font-family: Basic;
+            src: url(Prociono-Regular.ttf);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            background-color: #F9F9F9;
+        }
+
+        iframe {
+            display: block;
+            border:none;
+            
+        }
+
+        div, iframe {
+            width: 100%;
+            height: 100vh;
+        }
+
+        a {
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        li:first-child:hover{
+            background: rgb(160,204,205);
+            background: linear-gradient(90deg, rgba(160,204,205,1) 0%, rgba(237,200,138,1) 35%, rgba(179,227,237,1) 100%);
+            text-align: center;
+        }
+
+        .container {
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            height: 80%;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        h1.title {
+            font-family: Basic;
+            font-size: 40px;
+        }
+
+        nav {
+            display: block;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1;
+            background: rgb(133,209,233);
+            background: linear-gradient(90deg, rgba(133,209,233,1) 0%, rgba(211,242,236,1) 42%, rgba(234,249,232,1) 100%);
+            display: flex;
+            justify-content:space-around;
+            align-items: center;
+            height: 8vh;
+        }
+
+        nav a {
+          display: block;
+          font-family: Basic;
+          text-decoration: none;
+          text-align: center;
+          padding: 0px 20px;
+          font-size: clamp(1.1rem, 1.3vw,2rem);
+          color: black;  
+          transition: all 0.25s ease 0s;
+        }
+
+        nav a[href ^= "#"]:hover {
+            background-color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .JackAu {
+          font-family: JackAu_Icon;
+          text-decoration: none;
+          opacity: 0.5;
+          font-size: 35px;
+          margin-left:2%;
+          color: black;
+        }
+
+        .Menu {
+            display: none;
+            background: #b0fbfb83;
+            margin-right: 3%;
+            border:none;
+            border-radius: 10px 100px / 120px;
+            padding: 2%;
+            text-align: center;
+            text-decoration: none;
+            font-size: 15px;
+            font-family: Basic;
+            cursor: pointer;
+        }
+
+        .Menu:hover {
+            background: rgb(168,245,245);
+            background: linear-gradient(90deg, rgba(168,245,245,1) 0%, rgba(205,230,231,1) 32%, rgba(245,243,211,1) 62%, rgba(243,194,80,1) 100%);
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+            transform: translateY(4px);
+        }
+
+        .dropdown {
+            max-width: 10%;
+            height: auto;
+        }
+
+        .dropdown_menu {
+            max-width: 10%;
+            height: 30vh;
+            background: rgb(168,245,245);
+            background: linear-gradient(90deg, rgba(168,245,245,1) 0%, rgba(205,230,231,1) 32%, rgba(245,243,211,1) 62%, rgba(243,194,80,1) 100%);
+            display:none;
+            position:absolute;
+            transform: translateX(-90px);
+            min-width: 150px;
+            box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+            z-index: 2;
+        }
+
+        .dropdown_menu a {
+          display: block;
+          font-family: Basic;
+          text-decoration: none;
+          text-align: center;
+          padding: 10px 20px;
+          font-size: clamp(1.1rem, 1.3vw,2rem);
+          color: black;  
+          transition: all 0.25s ease 0s;
+        }
+
+        .dropdown:hover .dropdown_menu {
+            display: block;
+        }
+
+        #Background {
+            height: 100vh;
+            background-image: linear-gradient(rgba(250, 245, 245, 0.855), rgba(155, 155, 155, 0.789)),url(Background.jpg);
+            background-position: center;
+            position: relative;
+        }
+
+        #Background > div {   
+            font-family: Basic;
+            font-size: large;     
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%);
+        }
+
+        #Background h1.title {
+            text-shadow:  rgb(164, 164, 164) 1px 0 10px;;
+        }
+
+        #About_Me{
+            background: rgb(133,209,233);
+            background: linear-gradient(180deg, rgba(133,209,233,1) 0%, rgba(211,242,229,1) 35%, rgba(249,233,210,1) 100%);
+        }
+
+        #About_Me img{
+            border-radius: 50%;
+            border: 3px solid;
+            max-width:580px;
+            max-height:300px;
+            margin: 3%; 
+        }
+
+        #About_Me .container p{
+            font-size: clamp(1rem, 1.5vw, 3rem); 
+            text-shadow: rgb(207, 207, 207) 1px 0 10px;
+            padding: 5%;
+        } 
+
+        #Work_Experience {
+            width: 100%;
+            background: rgb(208,249,251);
+            background: linear-gradient(90deg, rgba(208,249,251,1) 39%, rgba(250,211,182,1) 69%);
+        }
+
+        #Work_Experience .container {
+            align-items: stretch;
+            margin-top: 2%;
+        }
+
+        #Work_Experience > .container div{
+            max-width: 100%;
+            max-height: 100%;
+            border-style: double;  
+        }
+
+        #Work_Experience > .container > div {
+            padding: 2%;
+        }
+
+        #Work_Experience > .container > div h1{
+            /*font-size: 32px*/
+            font-size: clamp(1.8rem, 2.5vw, 2.8rem); 
+            padding: 1%;
+        }
+
+        #Work_Experience h3{
+            /* font-size: 28px; */
+            font-size: clamp(1.5rem, 1.8vw, 2rem); 
+            padding: 1%;
+        }
+
+        #Work_Experience u {
+            /* font-size: 24px; */
+            font-size: clamp(1rem, 1.3vw, 1.5rem); 
+            padding: 1%;
+        }
+
+        #Work_Experience ul li{
+            /* font-size: 18px; */
+            font-size: clamp(0.8rem, 1vw, 1.2rem); 
+            padding: 1%;
+        }
+
+        #Work_Experience p{
+            /* font-size: 18px; */
+            font-size: clamp(0.8rem, 1vw, 1.2rem);  
+            padding: 1%;
+        }
+
+        #Projects {
+            background: rgb(214,236,236);
+            background: linear-gradient(90deg, rgba(214,236,236,1) 0%, rgba(163,238,240,1) 35%, rgba(214,211,149,1) 59%, rgba(239,207,132,1) 100%);
+            text-align: center;
+        }
+
+        #Projects a:link,#Projects a:visited {
+            color: blue;
+        }
+
+        #Projects img {
+            position: relative;
+            max-width:30%;
+            max-height: 80%;
+            border-radius: 15px 50px 30px;
+            box-shadow:0 0 16px rgba(0,0,0,0.5);
+        }
+
+        .Project_hidden {
+            display: none;
+            position: absolute;
+            z-index: 1;
+            max-width: 30%;
+            opacity: 0.96;
+            max-height: 75%;
+            border-radius: 15px 50px 30px;;
+            background: rgb(248,254,215);
+            background: linear-gradient(90deg, rgba(248,254,215,1) 0%, rgba(231,241,191,1) 35%, rgba(198,236,244,1) 100%);
+        }
+
+        #Projects img:hover + .Project_hidden {
+            display: block;
+        }
+
+        #Contact_Me {
+            background: rgb(200,255,236);
+            background: linear-gradient(13deg, rgba(200,255,236,1) 0%, rgba(179,236,247,1) 35%, rgba(246,206,110,1) 79%, rgba(246,206,110,1) 100%);
+        }
+
+        #Contact_Me {
+            background: rgb(200,255,236);
+            background: linear-gradient(13deg, rgba(200,255,236,1) 0%, rgba(179,236,247,1) 35%, rgba(246,206,110,1) 79%, rgba(246,206,110,1) 100%);
+        }
+
+        #Contact_Me .container{
+            justify-content: space-between;
+        }
+
+        #Contact_Me table {
+            margin: 5%;
+        } 
+
+        #Contact_Me a:link, #Contact_Me a:visited {
+            color: blue;
+        }
+
+        @media only screen and (max-width: 1024px) {
+            h1.title{
+                font-size: 30px;
+            }
+
+            .JackAu {
+              font-size: 30px;
+            }
+
+            .Menu {
+                display: block;
+            }
+
+            a[href ^= "#"] {
+                display:none;
+            }
+
+            .dropdown a[href ^= "#"] {
+                display:block;
+            }
+
+            #About_Me .container {
+                flex-direction: column;
+            }
+
+            #Work_Experience > .container {
+                flex-direction: column;
+            }
+
+            #Work_Experience > .container div {
+                width: 100%
+            }
+
+            #Contact_Me .container {
+                flex-direction: column;
+            }
+
+            #Contact_Me table {
+                margin: 3%
+            }
+
+            ul li {
+                list-style-type: none;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a class = "JackAu" href = "index.html">Jack Au</a>
+        <a href = "#About_Me">About Me</a> 
+        <a href = "#Work_Experience">Work Experience</a> 
+        <a href = "#Projects">Projects</a>
+        <a href = "#Contact_Me">Contact Me</a>
+        <div class = "dropdown">
+            <span class = "Menu">Menu</span>
+            <div class = "dropdown_menu">
+                <a href = "#About_Me">About Me</a> 
+                <a href = "#Work_Experience">Work Experience</a> 
+                <a href = "#Projects">Projects</a>
+                <a href = "#Contact_Me">Contact Me</a>
+            </div>
+        </div>
+    </nav>
+        
+    <div id = "Background">
+        <div>
+            <h1 class = "title">Hi Everyone This is Jack Au!</h1>
+            <p style = "margin: 5%; font-size: larger;">Scroll Down to know more about me!</p>
+        </div>
+        <!-- https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_hero_image -->
+        <!-- https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_image_overlay_title -->
+    </div>
+
+    <div id = "About_Me">
+        <h1 class = "title">About Me</h1>
+        <div class = "container">
+            <img src="Personal_Photo.jpg" alt="Jack Au">
+            <p>I am a Year 3 student majoring in Financial Technology and Artificial Intelligence at 
+                The Hong Kong Polytechnic University. I am currently focusing on nourishing my skills in 
+                software development with languages like Java, C++, python, etc. 
+                Other than the software development aspect, I have also been broadening my understanding 
+                in FinTech area from different online resources like Coursera. I am concentrating in 
+                gaining knowledge about Dencentralized Finance(DeFi) and P2P lending and loaning. 
+                Besides my focuses and learning, I have had working experience in System Implementation area and acquired knowledges 
+                in two softwares widely used in datacenters, SolarWinds and VMware. </p>
+        </div>
+    </div>
+
+    <!-- https://linuxhint.com/change-font-size-media-queries/ -->
+    <div id = "Work_Experience">
+        <h1 class="title">Work Experience</h1>
+        <div class = "container">
+            <div>
+                <h1>Major-Related</h1>
+                <h3>HGC Global  Communications Limited</h3>
+                <u>System Engineer Trainee</u>
+                <ul>
+                    <li>Automated the process of uploading customized template to Asana with VBA & python</li>
+                    <li>Assisted colleagues in system configuration (System Implementation)</li>
+                    <li>Worked With products SolarWinds NPM NTA</li>
+                </ul>
+                
+                <u>Summer Internship - System Engineer </u>
+                <ul>
+                    <li>Automated the process of sending weekly emails with PowerShell language</li>
+                    <li>Automated the process of uploading customized template to Asana with python</li>
+                    <li>Assisted colleagues in system configuration (System Implementation)</li>
+                </ul>
+            </div>
+
+            <div>
+                <h1>Others</h1>
+                <h3>Student Assistant</h3>
+                <p>Open Forum - Post Pandemic Challenge: New Economy And Technologies</p>
+                
+                <h3>Student Assistant</h3>
+                <p>IEEE International Conference on Teaching, Assessment, and Learning for Engineering (TALE) 2022</p>
+
+                <h3>Tutor (Part Time)</h3>
+                <p>JOYOUS LEARNERS EDUCATION CENTRE </p>
+            </div>
+        </div>
+    </div>
+
+    <div id = "Projects">
+        <h1 class = "title">Projects</h1>
+        <div class = "container">
+            <img src="Zenbu.png" alt="Zenbu">
+            <div class = "Project_hidden">  
+                <h1>Zenbu</h1>
+                <h3>Description: &#x1F50D;</h3>
+                <p>Zenbu, a open banking application, aim at providing cutting edge financial services to the GenZ audience and rennovate their financial habit. </p>
+                <br>
+                <h3>Contributions &#x1F4AA;</h3>
+                <p>Constructing sign up pages and implement them in Flutter</p>
+                <br>
+                <p>URL: <a href = "https://github.com/lvyin1122/zenbu" target = "_blank">https://github.com/lvyin1122/zenbu</a></p>
+            </div>
+        </div>
+        <!-- https://stackoverflow.com/questions/16109687/overlay-hover-a-div-in-flexbox-container-div -->
+        <!-- https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_image_overlay_title -->
+        <!--https://www.w3schools.com/howto/howto_js_popup.asp-->
+        <!--https://www.w3schools.com/howto/howto_js_popup_form.asp-->
+        <!-- https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_toggle_hide_show -->
+        <!-- https://www.w3docs.com/snippets/css/display-the-hidden-element-on-hovering-over-hyperlink-or-a-tag.html -->
+        <!-- https://stackoverflow.com/questions/40050993/on-image-hover-show-div-and-hide-the-div-on-mouse-out-->
+    </div>
+
+    <div id = "Contact_Me">
+        <h1 class = "title">Contact Me</h1>
+        <div class = "container">
+            <table>
+                <tr>
+                    <td><img src = "Phoneicon.png" alt = "Phone"></td>
+                    <td>+852 12345678</td>
+                </tr>
+            </table>
+    
+            <table>
+                <tr>
+                    <td><img src = "Mailicon.png" alt = "Mail"></td>
+                    <td><a href="mailto:20065435d@connect.polyu.hk">20065435d@connect.polyu.hk</a></td>
+                </tr>
+            </table>
+    
+            <table>
+                <tr>
+                    <td><img src = "LinkedInicon.png" alt = "LinkedIn"></td>
+                    <td><a href = "http://www.linkedin.com/in/jack-au-2a387723b" target = "_blank">Linkedin</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- <iframe id = "Contact_Me" src="contactme.html"></iframe>      -->
+
+    <script>
+        window.onscroll = function() {determine_NavBar_Appear()};
+        const navbar = document.getElementsByTagName("nav");
+        const aboutme = document.getElementById("About_Me").offsetTop;
+    
+        function determine_NavBar_Appear() {
+            console.log(aboutme)
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            console.log (winScroll)      
+            if (winScroll >= aboutme || winScroll == aboutme) {
+                navbar[0].style.display = "none";
+            } else {    
+                navbar[0].style.display = "flex";
+            }
+        }
+    </script>
+        
+</body>
+</html>
